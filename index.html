@@ -1,0 +1,203 @@
+<!DOCTYPE html><html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Happy 19th Dendi</title>
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#0b1f3a;
+  color:#111;
+}
+.page{
+  display:none;
+  max-width:900px;
+  margin:0 auto;
+  padding:24px 16px 60px;
+  animation: fadeIn .6s ease;
+}
+@keyframes fadeIn{from{opacity:0; transform:translateX(10px);} to{opacity:1; transform:none;}}
+.page.active{display:block;}
+.card{
+  background:white;
+  border-radius:16px;
+  padding:20px;
+  margin:20px 0;
+  box-shadow:0 4px 20px rgba(0,0,0,.2);
+  text-align:center;
+}
+h1{color:white; text-align:center; letter-spacing:1px;}
+.btn{
+  background:#0b1f3a;
+  color:white;
+  border:none;
+  padding:10px 14px;
+  border-radius:8px;
+  margin:6px;
+  cursor:pointer;
+}
+.btn:hover{opacity:.9;}
+.hidden{display:none;}
+.peyek{
+  width:220px;
+  max-width:100%;
+  border-radius:12px;
+  margin:10px 0;
+}
+.hearts{
+  display:grid;
+  grid-template-columns:repeat(5, 1fr);
+  gap:8px;
+  max-width:320px;
+  margin:12px auto;
+}
+.heart{font-size:28px; cursor:pointer; user-select:none;}
+.count{font-weight:bold;}
+.ucapan{
+  white-space:pre-line;
+  margin-top:14px;
+  padding-top:10px;
+  border-top:1px solid #ddd;
+}
+.nav{margin-top:16px;}
+#confetti{
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  pointer-events:none; display:none;
+}
+</style>
+</head>
+<body>
+  <audio id="bgm" loop>
+    <source src="happybirthday.mp3" type="audio/mpeg">
+  </audio>  <audio id="bgm" loop>
+    <source src="happybirthday.mp3" type="audio/mpeg">
+  </audio>  <h1>HAPPY BIRTHDAY DENDI SAYANG 🤍</h1>  <!-- HALAMAN 1 -->  <div class="page active" id="p1">
+    <div class="card">
+      <h3>Game 1 — Tebak Gambar</h3>
+      <p>Gambar apa ini?</p>
+      <img src="peyek.jpg" alt="peyek" class="peyek" />
+      <div>
+        <button class="btn" onclick="cek1('peyek')">A. Peyek</button>
+        <button class="btn" onclick="cek1('kasreng')">B. Kasreng</button>
+        <button class="btn" onclick="cek1('basreng')">C. Basreng</button>
+      </div>
+      <div class="ucapan hidden" id="ucapan1">
+HAPPY BIRTHDAY SAYANGKU CINTAKUUUU
+Damn baru 19 tahun, emang masih jaman baru umur 19 tahun AKWOKWOKWOK. Di hari spesial ini semoga kamu bahagia selalu, segala cita cita dan impian kamu bisa terwujud, sehat selalu, rezekinya lancar, pokoknya semua yang terbaik buat kamu💞
+      </div>
+      <div class="nav hidden" id="next1">
+        <button class="btn" onclick="showPage('p2')">Lanjut ke Game 2 →</button>
+      </div>
+    </div>
+  </div>  <!-- HALAMAN 2 -->  <div class="page" id="p2">
+    <div class="card">
+      <h3>Game 2 — Tebak</h3>
+      <p>Tau nggak kamu sama dinosaurus itu punya kesamaan?</p>
+      <button class="btn" onclick="buka2()">Engga, apa tuhh persamaannya</button>
+      <div class="hidden" id="jawaban2">
+        <p><strong>Sama sama langka dan susah ditemui, YHAHAHA HAYYUKKK</strong></p>
+        <p>Ikan hiu nanem sawit<br/>I love you setinggi langit</p>
+      </div>
+      <div class="ucapan hidden" id="ucapan2">
+Dennnn makasih banyak ya udah jadi sahabat terbaik aku, makasih udah selalu inget aku, maaf ya kalo aku masih banyak kurangnya selama jadi temen kamu, semoga kita tetep begini terus sampe nanti tua dahh, i love you bubub sayang🫶🏻
+      </div>
+      <div class="nav hidden" id="next2">
+        <button class="btn" onclick="showPage('p3')">Lanjut ke Game 3 →</button>
+      </div>
+    </div>
+  </div>  <!-- HALAMAN 3 -->  <div class="page" id="p3">
+    <div class="card">
+      <h3>Game 3 — Klik 19 Hati</h3>
+      <p>Klik <span class="count" id="n">0</span>/19 hati</p>
+      <div class="hearts" id="hearts"></div>
+      <div class="ucapan hidden" id="ucapan3">
+Terakhir, semoga di usia 19 ini kamu makin tenang menghadapi hidup, makin kuat, tetap jadi Dendi yang hangat ke orang orang di sekitar kamu, dan suatu hari bisa bangga sama pilihan pilihan yang kamu buat sendiri❤️
+      </div></div>
+
+  </div><canvas id="confetti"></canvas>
+  <script>
+const bgm = document.getElementById('bgm');
+// Mulai musik saat interaksi pertama
+window.addEventListener('click', ()=>{ bgm.play(); }, {once:true});
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// GAME 1
+function cek1(jawab){
+  if(jawab==='peyek'){
+    document.getElementById('ucapan1').classList.remove('hidden');
+    document.getElementById('next1').classList.remove('hidden');
+  } else {
+    alert('Salah! Coba lagi 😉');
+  }
+}
+
+// GAME 2
+function buka2(){
+  document.getElementById('jawaban2').classList.remove('hidden');
+  document.getElementById('ucapan2').classList.remove('hidden');
+  document.getElementById('next2').classList.remove('hidden');
+}
+
+// GAME 3 - buat 19 hati
+const hearts = document.getElementById('hearts');
+for(let i=0;i<19;i++){
+  const h = document.createElement('div');
+  h.className='heart';
+  h.textContent='🤍';
+  h.onclick = function(){
+    if(this.textContent==='🤍'){
+      this.textContent='❤️';
+      updateCount();
+    }
+  };
+  hearts.appendChild(h);
+}
+function updateCount(){
+  let c=0;
+  document.querySelectorAll('.heart').forEach(h=>{ if(h.textContent==='❤️') c++; });
+  document.getElementById('n').textContent = c;
+  if(c===19){
+    document.getElementById('ucapan3').classList.remove('hidden');
+    document.getElementById('waBtn').classList.remove('hidden');
+    fireConfetti();
+  }
+}
+
+// CONFETTI SEDERHANA
+function fireConfetti(){
+  const canvas = document.getElementById('confetti');
+  const ctx = canvas.getContext('2d');
+  canvas.style.display='block';
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  let pieces = Array.from({length:120}, ()=>({
+    x: Math.random()*canvas.width,
+    y: Math.random()*canvas.height - canvas.height,
+    r: Math.random()*4+2,
+    d: Math.random()*5+2
+  }));
+  let t=0;
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p=>{
+      p.y += p.d;
+      if(p.y>canvas.height) p.y = -10;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle = 'hsl(' + (Math.random()*360) + ',80%,60%)' ;;
+      ctx.fill();
+    });
+    t++;
+    if(t<200) requestAnimationFrame(draw);
+    else canvas.style.display='none';
+  }
+  draw();
+}
+</script></body>
+</html>
+</html>
